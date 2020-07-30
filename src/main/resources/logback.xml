@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <Target>System.out</Target>
+        <Encoding>UTF-8</Encoding>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd_HH:mm:ss.SSS} %5p [%t] [%c{1}]:%L - %m%n
+            </pattern>
+        </encoder>
+    </appender>
+    <appender name="logfile"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Encoding>UTF-8</Encoding>
+        <encoder>
+<!--            <pattern>%d %p [%t] [%c]:%L - %m%n</pattern>-->
+            <pattern>%d %p [%c]:[%L] - %m%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log/%d{yyyy-MM-dd-HH'.log'}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <logger name="org.springframework" level="WARN" />
+    <logger name="org.springframework.remoting" level="WARN" />
+    <logger name="org.springframework.scheduling.quartz" level="WARN" />
+    <logger name="org.springframework.data.jpa" level="DEBUG" />
+    <logger name="org.cometd" level="WARN" />
+    <!--mongodb loggers-->
+    <logger name="org.mongodb.driver.cluster" level="WARN"/>
+    <logger name="org.mongodb.driver.connection" level="WARN"/>
+    <logger name="org.mongodb.driver.protocol.insert" level="WARN"/>
+    <logger name="org.mongodb.driver.protocol.delete" level="WARN"/>
+    <logger name="org.mongodb.driver.protocol.query" level="WARN"/>
+    <logger name="org.mongodb.driver.protocol.getmore" level="WARN"/>
+    <logger name="org.mongodb.driver.protocol.command" level="WARN"/>
+    <logger name="org.mongodb.driver.protocol.uri" level="WARN"/>
+    <logger name="org.mongodb.driver.protocol.management" level="WARN"/>
+    <!-- <logger name="com.ibatis" level="DEBUG"></logger> -->
+    <logger name="com.ssm_weixin.controller" level="INFO"></logger>
+    <logger name="com.ssm_weixin.aop" level="INFO"></logger>
+
+    <root level="ERROR">
+        <appender-ref ref="stdout" />
+        <appender-ref ref="logfile" />
+    </root>
+</configuration>
